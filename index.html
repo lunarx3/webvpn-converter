@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园内网 WebVPN 智能转换器</title>
+    <meta name="description" content="零服务器传输、纯本地运行的智能 WebVPN 链接生成器。支持电子科技大学（UESTC）及其他网瑞达 WebVPN 系统，保障数据安全隐私。">
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Local CryptoJS Core & CFB Mode -->
+    <script src="crypto-js.min.js"></script>
+    <script src="mode-cfb.min.js"></script>
+    <!-- WebVPN Presets Configurations Database -->
+    <script src="presets.js"></script>
+</head>
+<body>
+
+
+    <main class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-wrapper">
+                <svg viewBox="0 0 24 24" class="logo-svg">
+                    <defs>
+                        <linearGradient id="purple-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#8b5cf6" />
+                            <stop offset="100%" stop-color="#06b6d4" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="url(#purple-cyan)" stroke-width="2" fill="none" />
+                    <path d="M12 6V12L16 14" stroke="url(#purple-cyan)" stroke-width="2" stroke-linecap="round" fill="none" />
+                </svg>
+            </div>
+            <h1>WebVPN 智能链接转换器</h1>
+            <p class="tagline">客户端离线解析 • 零数据上报</p>
+        </header>
+
+        <!-- Main Card Container -->
+        <section class="card glass-card">
+
+
+            <!-- Target URL Input -->
+            <div class="form-group">
+                <label for="targetUrl" class="field-label">目标内网地址 / IP</label>
+                <div class="input-container">
+                    <input type="text" id="targetUrl" placeholder="例如: http://121.48.163.81/ 或 www.jwc.uestc.edu.cn" autocomplete="off" autofocus>
+                    <button class="clear-btn" id="btnClear" title="清空" style="display: none;">&times;</button>
+                </div>
+            </div>
+
+            <!-- Configuration Accordion Toggle -->
+            <div class="accordion-header" id="btnToggleConfig">
+                <span>高级设置 (高校适配/密钥修改)</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" class="arrow-icon"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+            </div>
+            
+            <!-- Hidden Configuration Body -->
+            <div class="accordion-body" id="configBody">
+                <div class="config-grid">
+                    <div class="form-group">
+                        <label for="vpnHost" class="field-label">WebVPN 主机域名</label>
+                        <input type="text" id="vpnHost" value="webvpn.uestc.edu.cn">
+                    </div>
+                    <div class="form-group">
+                        <label for="vpnKey" class="field-label">AES 密钥 (Key/IV)</label>
+                        <input type="text" id="vpnKey" value="wrdvpnisthebest!">
+                    </div>
+                </div>
+                
+                <div class="presets-section">
+                    <span class="presets-label">快速预设：</span>
+                    <div class="presets-badges" id="presetsBadges">
+                        <!-- Dynamically populated from presets.js -->
+                    </div>
+                    <span class="presets-contrib-note">欢迎在 <code>presets.js</code> 中补充你学校的配置 🚀</span>
+                </div>
+            </div>
+
+            <!-- Conversion Result Output Box -->
+            <div class="result-area">
+                <div class="result-header">
+                    <span class="result-label">WebVPN 专属链接</span>
+                    <div class="status-indicator" id="statusIndicator">
+                        <span class="dot"></span>
+                        <span class="status-text">待输入</span>
+                    </div>
+                </div>
+                <div class="result-display-wrapper">
+                    <div id="resultOutput" class="result-text empty">等待输入源地址...</div>
+                </div>
+                
+                <!-- Action Controls -->
+                <div class="action-row">
+                    <button id="btnCopy" class="btn btn-primary" onclick="copyToClipboard()">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        复制专属链接
+                    </button>
+                    <button id="btnOpen" class="btn btn-secondary" onclick="openLink()">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        直接跳转访问
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Informative Footer -->
+        <footer class="app-footer">
+            <p>© 2026 WebVPN 智能助手. All cryptography performed locally in your browser sandbox.</p>
+            <p>免责声明：本工具仅供便捷查阅学术资源使用，请遵守所在机构的网络使用规范。</p>
+        </footer>
+    </main>
+
+    <!-- Global Toast Alerts -->
+    <div id="toast" class="toast">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" class="toast-icon"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="toastText">复制成功！</span>
+    </div>
+
+    <!-- App Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
