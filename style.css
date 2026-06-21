@@ -442,13 +442,22 @@ input[type="text"]:focus {
 
 
 
-/* Informative Footer */
 .app-footer {
     text-align: center;
     font-size: 11px;
     color: var(--text-muted);
     line-height: 1.6;
     padding: 0 20px;
+}
+.app-footer a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+.app-footer a:hover {
+    color: #22d3ee;
+    text-decoration: underline;
 }
 
 /* Toast Alert popup */
