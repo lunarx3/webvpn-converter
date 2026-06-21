@@ -1,5 +1,7 @@
 # 校园内网 WebVPN 智能转换器 (WebVPN Smart Link Converter)
 
+🚀 **在线免安装体验地址 (Live Demo)**: [https://lunarx3.github.io/webvpn-converter/](https://lunarx3.github.io/webvpn-converter/)
+
 [English](#english) | [中文说明](#中文说明)
 
 ---
@@ -13,7 +15,7 @@
 - **100% 本地运算 (Client-Side Only)**：所有 AES-128-CFB 加密逻辑和链接生成过程全部在浏览器端（用户本地设备）完成。没有任何网络请求会被发送至任何后端服务器，数据不会离开用户设备，保障数据及内网学术资源的绝对安全与隐私。
 - **免安装、即开即用**：无需配置 Python、Node.js 等后端运行环境，直接双击网页文件或部署至任意静态托管空间（如 Nginx、GitHub Pages、OSS）即可使用。
 - **极简多校适配**：支持针对不同高校的 WebVPN 网关进行自定义配置（自定义 Host 和加密 Key）。
-- **离线运行与本地历史**：支持将转换历史保存在浏览器的 `localStorage` 中，支持离线环境运行。
+- **离线运行 (Offline-Ready)**：网页支持完全单机离线运行。
 
 ---
 
@@ -82,6 +84,8 @@ server {
 
 ## English
 
+🚀 **Live Demo**: [https://lunarx3.github.io/webvpn-converter/](https://lunarx3.github.io/webvpn-converter/)
+
 A **pure client-side, zero-server-transmission, privacy-first** WebVPN link converter for university intranets. It helps students and researchers off-campus quickly generate and jump to intranet resources (IPs or domains) through WebVPN.
 
 ### 🌟 Key Features
@@ -89,7 +93,7 @@ A **pure client-side, zero-server-transmission, privacy-first** WebVPN link conv
 - **100% Local Cryptography**: All AES-128-CFB encryption operations are executed locally in the user's browser context via CryptoJS. No user inputs or decrypted URLs are sent to any remote server or cloud backend.
 - **Zero-Installation**: No server-side components (Python/Node/PHP) are needed. Just double-click the HTML file or host it as a static folder.
 - **Fully Customizable presets**: Easy to extend for different institutions by specifying the WebVPN host and crypt key.
-- **Offline & Storage Support**: Conversion histories are kept strictly inside the browser's `localStorage` sandbox. Fully operational offline.
+- **Offline-Ready**: The application is fully operational offline without any internet connection.
 
 ### 🤝 Contributing: How to Add Your School?
 
