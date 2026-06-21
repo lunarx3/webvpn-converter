@@ -43,12 +43,16 @@
         <section class="card glass-card">
 
 
-            <!-- Target URL Input -->
             <div class="form-group">
                 <label for="targetUrl" class="field-label">目标内网地址 / IP</label>
                 <div class="input-container">
-                    <input type="text" id="targetUrl" placeholder="例如: http://121.48.163.81/ 或 www.jwc.uestc.edu.cn" autocomplete="off" autofocus>
+                    <input type="text" id="targetUrl" placeholder="请输入或粘贴内网地址/IP..." autocomplete="off" autofocus>
                     <button class="clear-btn" id="btnClear" title="清空" style="display: none;">&times;</button>
+                </div>
+                <div class="form-tip">
+                    <span class="tip-label">输入示例（点击快速填入）：</span>
+                    <span class="tip-link" onclick="fillExample('https://zhty.uestc.cn/login')">https://zhty.uestc.cn/login</span> (体测考试预约平台) 或 
+                    <span class="tip-link" onclick="fillExample('http://121.48.163.81/')">http://121.48.163.81/</span> (远程实验平台)
                 </div>
             </div>
 

@@ -239,3 +239,11 @@ function escapeHtml(str) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
+
+// Click to fill example link helper
+function fillExample(exampleUrl) {
+    targetUrlInput.value = exampleUrl;
+    handleInputChange();
+    updateConversion();
+}
+window.fillExample = fillExample;
