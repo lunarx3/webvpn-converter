@@ -17,7 +17,7 @@ const WEBVPN_PRESETS = [
         name: "电子科技大学 (UESTC)",
         host: "webvpn.uestc.edu.cn",
         key: "wrdvpnisthebest!"
-    }
+    },
     // 欢迎在下方追加你的学校配置：
     /*
     {
@@ -26,4 +26,9 @@ const WEBVPN_PRESETS = [
         key: "wrdvpnisthebest!"
     }
     */
+    {
+        name: "西南财经大学 (SWUFE)",
+        host: "webvpn.swufe.edu.cn",
+        key: "wrdvpnisthebest!"
+    }
 ];
